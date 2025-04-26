@@ -1,0 +1,37 @@
+{% extends "health_app/base.html" %}
+
+{% block title %}Health Programs - Health Information System{% endblock %}
+
+{% block header %}Health Programs{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12 text-end">
+        <a href="{% url 'program_create' %}" class="btn btn-success">Create New Program</a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        {% if programs %}
+            <div class="row">
+                {% for program in programs %}
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ program.name }}</h5>
+                                <p class="card-text text-muted">Created: {{ program.created_date|date:"M d, Y" }}</p>
+                                <p class="card-text">{{ program.description|truncatewords:30 }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-info">
+                No health programs have been created yet.
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

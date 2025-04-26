@@ -1,0 +1,62 @@
+{% extends "health_app/base.html" %}
+{% load form_tags %}
+
+{% block title %}Clients - Health Information System{% endblock %}
+
+{% block header %}Registered Clients{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8">
+        <form method="get" class="d-flex">
+            {{ search_form.search.label_tag }}
+            {{ search_form.search|add_class:"form-control mx-2" }}
+            <button type="submit" class="btn btn-primary">Search</button>
+            {% if request.GET.search %}
+                <a href="{% url 'client_list' %}" class="btn btn-outline-secondary ms-2">Clear</a>
+            {% endif %}
+        </form>
+    </div>
+    <div class="col-md-4 text-end">
+        <a href="{% url 'client_create' %}" class="btn btn-success">Register New Client</a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        {% if clients %}
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Gender</th>
+                            <th>Contact</th>
+                            <th>Registered Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for client in clients %}
+                        <tr>
+                            <td>{{ client.get_full_name }}</td>
+                            <td>{{ client.get_gender_display }}</td>
+                            <td>{{ client.contact_number }}</td>
+                            <td>{{ client.registration_date|date:"M d, Y" }}</td>
+                            <td>
+                                <a href="{% url 'client_detail' client.id %}" class="btn btn-sm btn-info">View</a>
+                                <a href="{% url 'client_update' client.id %}" class="btn btn-sm btn-secondary">Edit</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="alert alert-info">
+                No clients found{% if request.GET.search %} matching "{{ request.GET.search }}"{% endif %}.
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
