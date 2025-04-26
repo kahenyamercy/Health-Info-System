@@ -3,7 +3,7 @@ services:
     name: health-info-system
     env: python
     buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate
-    startCommand: gunicorn health_info_system.wsgi:application # Match your actual project name
+    startCommand: gunicorn health_system.wsgi:application 
     envVars:
       - key: SECRET_KEY
         generateValue: true
