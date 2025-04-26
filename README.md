@@ -13,6 +13,10 @@ A comprehensive health information system for managing clients and health progra
 - **RESTful API**: Expose client profile information through RESTful APIs for external system integration
 - **Responsive Design**: Works seamlessly on desktop and mobile devices
 
+## DEMO
+[https://www.loom.com/share/b8afd93dac434c0da31320b18b91c8db?sid=d441ddb3-41c1-409b-b997-194e71f0a5ff]
+
+
 ## Technologies Used
 
 - **Backend**: Django 5.2
